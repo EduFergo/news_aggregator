@@ -11,7 +11,7 @@ class ElPaisSpider(scrapy.Spider):
         self.seen_urls = set()
 
     def parse(self, response):
-        articles = response.xpath('//article')
+        articles = response.xpath('//article[not(ancestor::section[contains(@data-dtm-region, "pasatiempos")])]')
         for idx, article in enumerate(articles):
             link = article.xpath('.//h2/a/@href | .//h3/a/@href').get()
             if link and link not in self.start_urls and link not in self.seen_urls:
@@ -21,7 +21,7 @@ class ElPaisSpider(scrapy.Spider):
     def parse_article(self, response, position):
         item = NewsAggregatorItem()
         item['position'] = position
-        item['title'] = response.xpath('//h1[@class="a_t"]/text()').get().strip()
+        item['title'] = response.xpath('//h1[@class="a_t"]/text()').get(default='').strip()
         author = response.xpath('//div[@class="a_md_a"]/a/text()').get(default='')
         item['author'] = author.strip() if author else None
         item['date'] = response.xpath('//time/@datetime').get()
