@@ -29,6 +29,7 @@ class LvdgSpider(scrapy.Spider):
         authors = response.css('span.author a::text').getall()
         item['author'] = ', '.join([author.strip() for author in authors]) if authors else None
         item['source'] = "La Voz de Galicia"
+        item['url'] = response.url
 
         #Las noticias Spam que continen el formato noticia en la url tienen en común que no tinene ni título, ni autor, ni fecha.
         #Por lo tanto, si no se encuentra ninguno de estos campos, se descarta la noticia.

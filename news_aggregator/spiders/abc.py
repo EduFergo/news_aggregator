@@ -36,6 +36,7 @@ class AbcSpider(scrapy.Spider):
         author = response.css('section.voc-author p.voc-author__name a::text').get(default='')
         item['author'] = author.strip() if author else None
         item['source'] = "ABC"
+        item['url'] = response.url
 
         yield item
 

@@ -28,5 +28,6 @@ class ElPaisSpider(scrapy.Spider):
         item['author'] = author.strip() if author else None
         item['date'] = response.xpath('//time/@datetime').get()
         item['source'] = "El País"
+        item['url'] = response.url
 
         yield item

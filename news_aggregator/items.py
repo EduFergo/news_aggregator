@@ -12,3 +12,4 @@ class NewsAggregatorItem(scrapy.Item):
     date = scrapy.Field()
     author = scrapy.Field()
     source = scrapy.Field()
+    url = scrapy.Field()
