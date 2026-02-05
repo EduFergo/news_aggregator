@@ -22,14 +22,15 @@ class AbcSpider(scrapy.Spider):
 
     def parse(self, response):
         articles = response.css('article')
-        for article in articles:
+        for idx, article in enumerate(articles):
             link = article.css("h2 a::attr(href)").get()
             if link and link not in self.start_urls:
                 self.seen_urls.add(link)
-                yield response.follow(link, callback = self.parse_article)
+                yield response.follow(link, callback = self.parse_article, cb_kwargs={'position': idx + 1})
 
-    def parse_article(self, response):
+    def parse_article(self, response, position):
         item = NewsAggregatorItem()
+        item['position'] = position
         item['title'] = response.css('h1::text').get(default='').strip()
         item['date'] = response.css('section.voc-author time::attr(datetime)').get()
         author = response.css('section.voc-author p.voc-author__name a::text').get(default='')
