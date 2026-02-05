@@ -11,9 +11,11 @@ class ElPaisSpider(scrapy.Spider):
         self.seen_urls = set()
 
     def parse(self, response):
-        articles = response.xpath('//article[not(ancestor::section[contains(@data-dtm-region, "pasatiempos")])]')
+        articles = response.xpath('//article')
         for idx, article in enumerate(articles):
             link = article.xpath('.//h2/a/@href | .//h3/a/@href').get()
+            if 'motor.elpais.com' in link or '/juegos/' in link:
+                continue
             if link and link not in self.start_urls and link not in self.seen_urls:
                 self.seen_urls.add(link)
                 yield response.follow(link, callback=self.parse_article, cb_kwargs={'position': idx + 1})
