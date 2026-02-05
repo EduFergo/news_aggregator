@@ -17,8 +17,3 @@ ENV/
 .vscode/
 .idea/
 .DS_Store
-
-# Archivos de salida (Opcional)
-# Si quieres que el profesor vea tu all_news.json NO lo pongas aquí.
-# Si prefieres que él lo genere al ejecutar, descomenta la línea de abajo:
-# all_news.json
