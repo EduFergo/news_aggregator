@@ -10,6 +10,9 @@ if __name__ == "__main__":
     settings = get_project_settings()
 
     settings.update({
+        'ITEM_PIPELINES': {
+        'news_aggregator.pipelines.NewsAggregatorPipeline': 300,
+    },
         'FEEDS': {
             'all_news.json': {
                 'format': 'json',
