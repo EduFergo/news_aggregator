@@ -1,0 +1,24 @@
+# Python - Archivos compilados y caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales (Virtual Environments)
+venv/
+.venv/
+env/
+ENV/
+
+# Scrapy - Archivos temporales y logs
+.scrapy/
+*.log
+
+# Archivos de configuración de editores (IDE)
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos de salida (Opcional)
+# Si quieres que el profesor vea tu all_news.json NO lo pongas aquí.
+# Si prefieres que él lo genere al ejecutar, descomenta la línea de abajo:
+# all_news.json
